@@ -1,20 +1,16 @@
-function [x,t] = note(f,vurus) %fonksiyonu tanimliyoruz.girilicek argumanlari tanýmladýk
-fs=8192;%örnekleme frekansý
-t = 0:1/fs:vurus; %0 dan dur a kadar 1/(100*ff) kadar artýyor
-%xx,tt]=note(1,3);
-%plot(tt,xx)
-%grafigi cizdirmek icin ustteki kodu command window'a yazariz
-
-    elemanS = length(tt); %% Eleman sayýsý
-    
-    attack = linspace(0,1.5,(elemanS*2/8));
-    
-    decay = linspace(1.5-(0.5/(elemanS/8)),1,(elemanS/8));
-    
-    sustain = ones(1,(elemanS/2));
-    
-    relase = linspace(1-(1/(elemanS/8)),0,(elemanS/8));
-    
-    zarf = [attack, decay, sustain, relase];
-
-    x = zarf .* sin(2*pi*f*t + zarf); %% zarflý sinüs döndürüldü.
+function[x,t]=note(frekans,vurus)%sinüs sinyali çizdiren fonksiyon
+    fs=8192;%örnekleme sayýsý deðiþkeni
+    t=0:1/fs:vurus-(1/fs); %sinyal periyodu 
+       a=length(t);%periyod boyutu deðiþkene atandý
+    hk=[1 0.8 0.4 0.1]; %harmonik katsayýlarý dizeye atandý.
+        b=length(hk); %harmonik kkatsayýlarý dizisinin boyutu b deðiþkenine atandý
+        x=zeros(1,a); %periyot de?erinin boyutu kadar s?f?r de?erinden olu?an bir x matris? tan?mland?
+        for i=1:b %1 den hk dizisi boyutuna kadar bir d?ng? olu?turuldu
+            x=x+(hk(i)*sin(2*pi*(i*frekans)*t)); %d??ar?dan al?nan de?erlere g?re olu?turulan sinus sinyalinin harmoni?i olu?turuldu
+        end
+A=linspace(0,1.5,a/4);%genli?i 1,5'a kadar ??kan ve periyodun 1/4'u kadar aral?kta vekt?r olu?turur
+B=linspace(1.5,1,a/8);%genli?i 1,5 dan 1'e kadar inen ve periyodun 1/8'i kadar aral?kta vekt?r olu?turur
+C=linspace(1,1,a/2);%genli?i sabitolan ve periyodun 1/2'si kadar aral?kta vekt?r olu?turur
+D=linspace(1,0,a/8);%genli?i 1 den 0'e kadar inen ve periyodun 1/8'i kadar aral?kta vekt?r olu?turur
+ zarf=[A B C D];%olu?turulan t?m vekt?rler bir dizide pe?pe?e s?ralan?r
+ x=x.*zarf;%x dizisinin her elemani zarf dizisinin her elemani tek tek ?arp?lara tekrar x dizisine atan?r yani x sinyali zarflan?r.
