@@ -7,7 +7,7 @@ go=round(fs/10); %gecikme süresi hesaplandý
 notalar=zeros(1,fs); %örnekleme süresi kadar sýfýrdan olusan bir dizi oluþturuldu
 a=zeros(1,length(notalar)); %notalar matrisi boyutlarýnda sýfýrdan olusan bir dizi olusturuldu
 durak=zeros(1,ds); %durma süresi boyutunda sýfýrdan olusan bir dizi olusturuldu
-oktav=str2num(cell2mat(b)); %dosyadan cell olarak okunan degiskenler double degere dönüþtürüldü.
+oktav=str2num(cell2mat(b)); %dosyadan cell olarak okunan degiskenler double degere d?önüþtürüldü.
 %%
   
 for i=1:(length(nota)) %nota dizisi boyu kadar döngü oluturuldu
@@ -21,8 +21,8 @@ for i=1:(length(nota)) %nota dizisi boyu kadar döngü oluturuldu
  
    notalarecho=zeros(1,(length(notalar))); %notalar matrisi boyutlarýnda sýfýrdan olusan bir dizi olusturuldu
  for i=1:(length(notalar)) %notalar dizisi boyu kadar döngü oluturuldu
-     f=(go+i); %echo oluþturmak için gerekli olan gecikme süresi döngüye sokuldu
-     if f<(length(notalar)) %gecikme süresi notalar matrisinin boyutunu geçmesin diye sart saglandý
+     f=(go+i); %echo olu?turmak i?in gerekli olan gecikme s?resi d?ng?ye sokuldu
+     if f<(length(notalar)) %gecikme s?resi notalar matrisinin boyutunu ge?mesin diye ?art sa?land?
      notalarecho(i)=notalar(i)*0.3+notalar(f); %deðerlerin yüzde 30 u alýnarak gecikme süresi hesaplandý
      else 
       notalarecho(i)=notalar(i)*0.3+0; 
@@ -32,6 +32,6 @@ for i=1:(length(nota)) %nota dizisi boyu kadar döngü oluturuldu
  %%
  
   normalizenotalarecho=zeros(1,(length(notalar)));%normalizasyon deðiþkeni tanýmlandý.
-  normalizenotalarecho=notalarecho/max(abs(notalarecho));%sinyalin tepe deðerleri 1'e normalize edilmiþtir.
+  normalizenotalarecho=notalarecho/max(abs(notalarecho));%sinyalin tepe de?erleri 1'e normalize edilmi?tir.
   plot(normalizenotalarecho)
 sound(normalizenotalarecho) %sinyal döndürüldü
